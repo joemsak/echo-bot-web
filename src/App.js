@@ -10,8 +10,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://echo-chmbr.herokuapp.com/posts", { mode: 'no-cors' })
-    .then(function(response) {
+    fetch("https://echo-chmbr.herokuapp.com/posts", {
+      mode: 'cors',
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then(function(response) {
       return response.json();
     }).then(function(json) {
       return this.setState({ posts: json.data });
