@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import Api from '../utils/api';
+import get from '../utils/api';
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    Api.get("/shares", function(json) {
+    get("/shares", function(json) {
       return this.setState({ shares: json.data });
     }.bind(this))
   }

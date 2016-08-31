@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Api from '../utils/api';
+import get from '../utils/api';
 import TableView from './table-view';
 
 class Channel extends Component {
@@ -12,7 +12,7 @@ class Channel extends Component {
   }
 
   componentDidMount() {
-    Api.get(`/channels/${this.props.params.id}`, function(json) {
+    get(`/channels/${this.props.params.id}`, function(json) {
       return this.setState({ channel: json.data });
     }.bind(this));
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Api from '../utils/api';
+import get from '../utils/api';
 import TableView from './table-view';
 
 class Team extends Component {
@@ -12,7 +12,7 @@ class Team extends Component {
   }
 
   componentDidMount() {
-    Api.get(`/teams/${this.props.params.id}`, function(json) {
+    get(`/teams/${this.props.params.id}`, function(json) {
       return this.setState({ team: json.data });
     }.bind(this));
   }

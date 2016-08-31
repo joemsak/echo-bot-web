@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
-import Api from '../utils/api';
+import get from '../utils/api';
 import TableView from './table-view';
 
 class Post extends Component {
@@ -13,7 +12,7 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    Api.get(`/posts/${this.props.params.id}`, function(json) {
+    get(`/posts/${this.props.params.id}`, function(json) {
       return this.setState({ post: json.data });
     }.bind(this));
   }
