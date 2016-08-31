@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+import Api from '../utils/api';
+
 class User extends Component {
   constructor(props) {
     super(props);
@@ -10,16 +12,7 @@ class User extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://echo-chmbr.herokuapp.com/users/${this.props.params.id}`, {
-      mode: 'cors',
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }).then(function(response) {
-      return response.json();
-    }).then(function(json) {
+    Api.get(`/users/${this.props.params.id}`, function(json) {
       return this.setState({ user: json.data });
     }.bind(this));
   }
@@ -34,7 +27,7 @@ class User extends Component {
         </tr>
       );
     } else {
-      return(<tr><td colspan="3">Loading...</td></tr>);
+      return(<tr><td colSpan="3">Loading...</td></tr>);
     }
   }
 
