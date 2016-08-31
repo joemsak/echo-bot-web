@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
-class Team extends Component {
+class Post extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      team: undefined,
+      post: undefined,
     };
   }
 
   componentDidMount() {
-    fetch(`https://echo-chmbr.herokuapp.com/teams/${this.props.params.id}`, {
+    fetch(`https://echo-chmbr.herokuapp.com/posts/${this.props.params.id}`, {
       mode: 'cors',
       method: 'get',
       headers: {
@@ -19,16 +20,17 @@ class Team extends Component {
     }).then(function(response) {
       return response.json();
     }).then(function(json) {
-      return this.setState({ team: json.data });
+      return this.setState({ post: json.data });
     }.bind(this));
   }
 
-  displayTeam() {
-    if(this.state.team) {
+  displayPost() {
+    if(this.state.post) {
       return(
         <tr>
-          <td>{this.state.team.id}</td>
-          <td>{this.state.team.name}</td>
+          <td>{this.state.post.id}</td>
+          <td>{this.state.post.url}</td>
+          <td><Link to={`/users/${this.state.post.user_id}`}>User #{this.state.post.user_id}</Link></td>
         </tr>
       );
     } else {
@@ -38,22 +40,23 @@ class Team extends Component {
 
   render() {
     return (
-      <table className="table team-table">
-        <caption>Slack Team Details</caption>
+      <table className="table post-table">
+        <caption>Slack Post Details</caption>
 
         <thead>
           <tr>
             <th>ID</th>
-            <th>Slack Name</th>
+            <th>URL</th>
+            <th>User</th>
           </tr>
         </thead>
 
         <tbody>
-          {this.displayTeam()}
+          {this.displayPost()}
         </tbody>
       </table>
     );
   }
 }
 
-export default Team;
+export default Post;

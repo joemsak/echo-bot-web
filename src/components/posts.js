@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-class ItemsTable extends Component {
+class Posts extends Component {
   render() {
     return (
-      <table className="table items-table">
+      <table className="table posts-table">
         <caption>Posts Echoed in Slack</caption>
 
         <thead>
@@ -16,12 +16,12 @@ class ItemsTable extends Component {
         </thead>
 
         <tbody>
-          {this.props.items.map(function(item) {
+          {this.props.posts.map(function(post) {
             return(
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.url}</td>
-                <td><Link to={`/users/${item.user_id}`}>{`User #${item.user_id}`}</Link></td>
+              <tr key={post.id}>
+                <td>{post.id}</td>
+                <td>{post.url}</td>
+                <td><Link to={`/users/${post.user_id}`}>{`User #${post.user_id}`}</Link></td>
               </tr>
             );
           })}
@@ -31,4 +31,4 @@ class ItemsTable extends Component {
   }
 }
 
-export default ItemsTable;
+export default Posts;

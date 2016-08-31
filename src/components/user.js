@@ -47,7 +47,7 @@ class User extends Component {
           <tr>
             <th>ID</th>
             <th>Slack Name</th>
-            <th>Team</th>
+            <th>Channel</th>
           </tr>
         </thead>
 

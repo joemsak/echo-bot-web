@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import ItemsTable from './components/items-table';
-import './App.css';
+import Posts from './components/posts';
 
 class App extends Component {
   constructor(props) {
@@ -27,9 +26,9 @@ class App extends Component {
 
   displayPosts() {
     if(this.state.posts.length === 0) {
-      return "No posts.";
+      return "Loading...";
     } else {
-      return(<ItemsTable items={this.state.posts} />);
+      return(<Posts posts={this.state.posts} />);
     }
   }
 
