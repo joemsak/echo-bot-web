@@ -18,9 +18,13 @@ class Team extends Component {
   }
 
   render() {
-    return (<TableView items={[this.state.team]}
-                       caption="Slack Team Details"
-                       headers={["id", "name"]} />);
+    return (
+      <TableView
+        items={[this.state.team]}
+        caption="Slack Team Details"
+        headers={["id", "name"]}
+      />
+    );
   }
 }
 

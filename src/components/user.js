@@ -18,11 +18,14 @@ class User extends Component {
   }
 
   render() {
-    return (<TableView items={[this.state.user]}
-                       caption="Slack User Details"
-                       link_root="/channels"
-                       link_name="Channel"
-                       headers={["id", "name", "channel_id"]} />);
+    return (
+      <TableView
+        items={[this.state.user]}
+        caption="Slack User Details"
+        link_root="/channels"
+        link_name="Channel"
+        headers={["id", "name", "channel_id"]}
+      />);
   }
 }
 

@@ -18,11 +18,14 @@ class Channel extends Component {
   }
 
   render() {
-    return (<TableView items={[this.state.channel]}
-                       caption="Slack Channel Details"
-                       link_root="/teams"
-                       link_name="Team"
-                       headers={["id", "name", "team_id"]} />
+    return (
+      <TableView
+        items={[this.state.channel]}
+        caption="Slack Channel Details"
+        link_root="/teams"
+        link_name="Team"
+        headers={["id", "name", "team_id"]}
+      />
     );
   }
 }

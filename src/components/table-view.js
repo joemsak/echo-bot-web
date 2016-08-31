@@ -2,35 +2,51 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 class TableView extends Component {
-  displayContent(item, header) {
+  loadingRow() {
+    return(
+      <tr>
+        <td colSpan={this.props.headers.length}>Loading...</td>
+      </tr>
+    );
+  }
+
+  tableCellContent(item, header) {
     if(header.match(/\w+_id$/)) {
-      return <Link to={`${this.props.link_root}/${item[header]}`}>{`${this.props.link_name} #${item[header]}`}</Link>;
+      return (
+        <Link to={`${this.props.link_root}/${item[header]}`}>
+          {`${this.props.link_name} #${item[header]}`}
+        </Link>
+      );
     } else {
       return item[header];
     }
   }
 
-  displayRows() {
+  tableRow(item) {
+    return(
+      <tr key={`item-${item['id']}`}>
+        {this.props.headers.map((header) => {
+          return (
+            <td key={`item-${item['id']}-${header}`}>
+              {this.tableCellContent(item, header)}
+            </td>
+          );
+        })}
+      </tr>
+    );
+  }
+
+  tableRows() {
     if(this.props.items.length > 0) {
       return this.props.items.map((item) => {
         if(item !== undefined) {
-          return(
-            <tr key={`item-${item['id']}`}>
-              {this.props.headers.map((header) => {
-                return (
-                  <td key={`item-${item['id']}-${header}`}>
-                    {this.displayContent(item, header)}
-                  </td>
-                );
-              })}
-            </tr>
-          );
+          return this.tableRow(item);
         } else {
-          return(<tr><td colSpan={this.props.headers.length}>Loading...</td></tr>);
+          return this.loadingRow();
         }
       });
     } else {
-      return(<tr><td colSpan={this.props.headers.length}>Loading...</td></tr>);
+      return this.loadingRow();
     }
   }
 
@@ -42,13 +58,13 @@ class TableView extends Component {
         <thead>
           <tr>
             {this.props.headers.map((header) => {
-              return(<th key={`table-header-${header}`}>{header}</th>);
+              return <th key={`table-header-${header}`}>{header}</th>;
             })}
           </tr>
         </thead>
 
         <tbody>
-          {this.displayRows()}
+          {this.tableRows()}
         </tbody>
       </table>
     );
