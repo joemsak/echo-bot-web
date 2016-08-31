@@ -21,7 +21,7 @@ class TableView extends Component {
       content = item[header];
     };
 
-    return <td key={`item-${item['id']}-${header}`}>{content} </td>;
+    return <td key={`item-${item['id']}-${header}`}>{content}</td>;
   }
 
   tableRow(item) {
