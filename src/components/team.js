@@ -12,9 +12,9 @@ class Team extends Component {
   }
 
   componentDidMount() {
-    get(`/teams/${this.props.params.id}`, function(json) {
+    get(`/teams/${this.props.params.id}`, (json) => {
       return this.setState({ team: json.data });
-    }.bind(this));
+    });
   }
 
   render() {

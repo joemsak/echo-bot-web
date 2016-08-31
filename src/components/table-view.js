@@ -12,23 +12,23 @@ class TableView extends Component {
 
   displayRows() {
     if(this.props.items.length > 0) {
-      return this.props.items.map(function(item) {
+      return this.props.items.map((item) => {
         if(item !== undefined) {
           return(
             <tr key={`item-${item['id']}`}>
-              {this.props.headers.map(function(header) {
+              {this.props.headers.map((header) => {
                 return (
                   <td key={`item-${item['id']}-${header}`}>
                     {this.displayContent(item, header)}
                   </td>
                 );
-              }.bind(this))}
+              })}
             </tr>
           );
         } else {
           return(<tr><td colSpan={this.props.headers.length}>Loading...</td></tr>);
         }
-      }.bind(this));
+      });
     } else {
       return(<tr><td colSpan={this.props.headers.length}>Loading...</td></tr>);
     }
@@ -41,7 +41,7 @@ class TableView extends Component {
 
         <thead>
           <tr>
-            {this.props.headers.map(function(header) {
+            {this.props.headers.map((header) => {
               return(<th key={`table-header-${header}`}>{header}</th>);
             })}
           </tr>

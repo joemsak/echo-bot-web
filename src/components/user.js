@@ -12,9 +12,9 @@ class User extends Component {
   }
 
   componentDidMount() {
-    get(`/users/${this.props.params.id}`, function(json) {
+    get(`/users/${this.props.params.id}`, (json) => {
       return this.setState({ user: json.data });
-    }.bind(this));
+    });
   }
 
   render() {

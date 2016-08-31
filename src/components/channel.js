@@ -12,9 +12,9 @@ class Channel extends Component {
   }
 
   componentDidMount() {
-    get(`/channels/${this.props.params.id}`, function(json) {
+    get(`/channels/${this.props.params.id}`, (json) => {
       return this.setState({ channel: json.data });
-    }.bind(this));
+    });
   }
 
   render() {

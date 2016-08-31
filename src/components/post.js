@@ -12,9 +12,9 @@ class Post extends Component {
   }
 
   componentDidMount() {
-    get(`/posts/${this.props.params.id}`, function(json) {
+    get(`/posts/${this.props.params.id}`, (json) => {
       return this.setState({ post: json.data });
-    }.bind(this));
+    });
   }
 
   render() {

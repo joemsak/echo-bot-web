@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Posts from './components/posts';
 
+import get from './utils/api';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -10,18 +12,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch("https://echo-chmbr.herokuapp.com/posts", {
-      mode: 'cors',
-      method: 'get',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }).then(function(response) {
-      return response.json();
-    }).then(function(json) {
+    get("/posts", (json) => {
       return this.setState({ posts: json.data });
-    }.bind(this));
+    });
   }
 
   displayPosts() {

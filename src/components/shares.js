@@ -11,9 +11,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    get("/shares", function(json) {
+    get("/shares", (json) => {
       return this.setState({ shares: json.data });
-    }.bind(this))
+    });
   }
 
   displayShares() {
@@ -34,7 +34,7 @@ class App extends Component {
           </thead>
 
           <tbody>
-            {this.state.shares.map(function(share) {
+            {this.state.shares.map((share) => {
               return(
                 <tr key={share.id}>
                   <td>{share.id}</td>

@@ -8,9 +8,9 @@ export default function get(endpoint, callback) {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-  }).then(function(response) {
+  }).then((response) => {
     return response.json();
-  }).then(function(json) {
+  }).then((json) => {
     return callback(json)
   });
 };
