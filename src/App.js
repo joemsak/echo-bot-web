@@ -36,7 +36,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Echochamber Posts</h1>
         {this.displayPosts()}
       </div>
     );

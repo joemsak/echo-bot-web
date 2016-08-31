@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
-class App extends Component {
+class ItemsTable extends Component {
   render() {
     return (
       <table className="table items-table">
+        <caption>Posts Echoed in Slack</caption>
+
         <thead>
           <tr>
             <th>ID</th>
@@ -18,7 +21,7 @@ class App extends Component {
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.url}</td>
-                <td>{item.user_id}</td>
+                <td><Link to={`/users/${item.user_id}`}>{`User #${item.user_id}`}</Link></td>
               </tr>
             );
           })}
@@ -28,4 +31,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ItemsTable;
