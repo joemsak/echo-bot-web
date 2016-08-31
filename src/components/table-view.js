@@ -10,28 +10,24 @@ class TableView extends Component {
     );
   }
 
-  tableCellContent(item, header) {
+  tableCell(item, header) {
+    let content;
+
     if(header.match(/\w+_id$/)) {
-      return (
-        <Link to={`${this.props.link_root}/${item[header]}`}>
-          {`${this.props.link_name} #${item[header]}`}
-        </Link>
-      );
+      content = <Link to={`${this.props.link_root}/${item[header]}`}>
+                  {`${this.props.link_name} #${item[header]}`}
+                </Link>;
     } else {
-      return item[header];
-    }
+      content = item[header];
+    };
+
+    return <td key={`item-${item['id']}-${header}`}>{content} </td>;
   }
 
   tableRow(item) {
     return(
       <tr key={`item-${item['id']}`}>
-        {this.props.headers.map((header) => {
-          return (
-            <td key={`item-${item['id']}-${header}`}>
-              {this.tableCellContent(item, header)}
-            </td>
-          );
-        })}
+        {this.props.headers.map((header) => { return this.tableCell(item, header) })}
       </tr>
     );
   }
