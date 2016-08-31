@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ItemsTable from './components/items-table';
 import './App.css';
 
 class App extends Component {
@@ -28,13 +29,14 @@ class App extends Component {
     if(this.state.posts.length === 0) {
       return "No posts.";
     } else {
-      return this.state.posts[0].url;
+      return(<ItemsTable items={this.state.posts} />);
     }
   }
 
   render() {
     return (
       <div className="App">
+        <h1>Echochamber Posts</h1>
         {this.displayPosts()}
       </div>
     );
