@@ -1,33 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+
+import TableView from './table-view';
 
 class Posts extends Component {
   render() {
-    return (
-      <table className="table posts-table">
-        <caption>Posts Echoed in Slack</caption>
-
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>URL</th>
-            <th>User ID</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {this.props.posts.map(function(post) {
-            return(
-              <tr key={post.id}>
-                <td>{post.id}</td>
-                <td>{post.url}</td>
-                <td><Link to={`/users/${post.user_id}`}>{`User #${post.user_id}`}</Link></td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
+    return (<TableView items={this.props.posts}
+                       caption="Posts Echoed in Slack"
+                       link_root="/users"
+                       link_name="User"
+                       headers={["id", "url", "user_id"]} />);
   }
 }
 

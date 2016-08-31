@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 import Api from '../utils/api';
+import TableView from './table-view';
 
 class User extends Component {
   constructor(props) {
@@ -17,38 +18,12 @@ class User extends Component {
     }.bind(this));
   }
 
-  displayUser() {
-    if(this.state.user) {
-      return(
-        <tr>
-          <td>{this.state.user.id}</td>
-          <td>{this.state.user.name}</td>
-          <td><Link to={`/channels/${this.state.user.channel_id}`}>Channel #{this.state.user.channel_id}</Link></td>
-        </tr>
-      );
-    } else {
-      return(<tr><td colSpan="3">Loading...</td></tr>);
-    }
-  }
-
   render() {
-    return (
-      <table className="table user-table">
-        <caption>Slack User Details</caption>
-
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Slack Name</th>
-            <th>Channel</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {this.displayUser()}
-        </tbody>
-      </table>
-    );
+    return (<TableView items={[this.state.user]}
+                       caption="Slack User Details"
+                       link_root="/channels"
+                       link_name="Channel"
+                       headers={["id", "name", "channel_id"]} />);
   }
 }
 

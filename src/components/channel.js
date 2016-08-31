@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
 import Api from '../utils/api';
+import TableView from './table-view';
 
 class Channel extends Component {
   constructor(props) {
@@ -17,37 +17,12 @@ class Channel extends Component {
     }.bind(this));
   }
 
-  displayChannel() {
-    if(this.state.channel) {
-      return(
-        <tr>
-          <td>{this.state.channel.id}</td>
-          <td>{this.state.channel.name}</td>
-          <td><Link to={`/teams/${this.state.channel.team_id}`}>Team #{this.state.channel.team_id}</Link></td>
-        </tr>
-      );
-    } else {
-      return(<tr><td colSpan="3">Loading...</td></tr>);
-    }
-  }
-
   render() {
-    return (
-      <table className="table channel-table">
-        <caption>Slack Channel Details</caption>
-
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Slack Name</th>
-            <th>Team</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {this.displayChannel()}
-        </tbody>
-      </table>
+    return (<TableView items={[this.state.channel]}
+                       caption="Slack Channel Details"
+                       link_root="/teams"
+                       link_name="Team"
+                       headers={["id", "name", "team_id"]} />
     );
   }
 }
