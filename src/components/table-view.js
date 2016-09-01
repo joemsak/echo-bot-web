@@ -69,7 +69,7 @@ class TableView extends Component {
 
   render() {
     return (
-      <table className="table channel-table">
+      <table className="table table-striped table-hover">
         <caption>{this.resource().replace(/^[a-z]/, (x) => { return x.toUpperCase() })}</caption>
 
         <thead>

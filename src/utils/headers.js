@@ -1,7 +1,7 @@
 export default function Headers(resource) {
   switch(resource) {
     case "shares":
-      return ["id", "name", "post_id", "user_id"];
+      return ["id", "type", "post_id", "user_id"];
 
     case "users":
       return ["id", "name", "channel_id"];
