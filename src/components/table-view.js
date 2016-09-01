@@ -1,21 +1,50 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+import get from '../utils/api';
+import Headers from '../utils/headers';
+
 class TableView extends Component {
-  loadingRow() {
-    return(
-      <tr>
-        <td colSpan={this.props.headers.length}>Loading...</td>
-      </tr>
-    );
+  constructor(props) {
+    super(props)
+    this.state = {
+      items: [],
+      headers: Headers(this.resource()),
+      pathname: (props.location || {}).pathname || "/posts",
+    }
+  }
+
+  resource(props = this.props) {
+    return (props.params || {}).resource || "posts"; 
+  }
+
+  componentDidMount() {
+    get(this.state.pathname, (json) => {
+      return this.setState({ items: [].concat(json.data) })
+    });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      pathname: nextProps.location.pathname,
+      headers: Headers(this.resource(nextProps)),
+    });
+
+    get(nextProps.location.pathname, (json) => {
+      return this.setState({ items: [].concat(json.data) })
+    });
   }
 
   tableCell(item, header) {
     let content;
 
     if(header.match(/\w+_id$/)) {
-      content = <Link to={`${this.props.link_root}/${item[header]}`}>
-                  {`${this.props.link_name} #${item[header]}`}
+      const linkRoot = header.replace('_id', 's'),
+            linkName = linkRoot.replace(/^[a-z]/, (x) => { return x.toUpperCase() })
+                               .replace(/s$/, '');
+
+      content = <Link to={`/${linkRoot}/${item[header]}`}>
+                  {`${linkName} #${item[header]}`}
                 </Link>;
     } else {
       content = item[header];
@@ -24,36 +53,28 @@ class TableView extends Component {
     return <td key={`item-${item['id']}-${header}`}>{content}</td>;
   }
 
-  tableRow(item) {
-    return(
-      <tr key={`item-${item['id']}`}>
-        {this.props.headers.map((header) => { return this.tableCell(item, header) })}
-      </tr>
-    );
-  }
-
   tableRows() {
-    if(this.props.items.length > 0) {
-      return this.props.items.map((item) => {
-        if(item !== undefined) {
-          return this.tableRow(item);
-        } else {
-          return this.loadingRow();
-        }
+    if(this.state.items.length > 0) {
+      return this.state.items.map((item) => {
+        return (
+          <tr key={`item-${item['id']}`}>
+            {this.state.headers.map((header) => { return this.tableCell(item, header) })}
+          </tr>
+        );
       });
     } else {
-      return this.loadingRow();
+      return <tr><td colSpan={this.state.headers.length}>Loading...</td></tr>;
     }
   }
 
   render() {
     return (
       <table className="table channel-table">
-        <caption>{this.props.caption}</caption>
+        <caption>{this.resource().replace(/^[a-z]/, (x) => { return x.toUpperCase() })}</caption>
 
         <thead>
           <tr>
-            {this.props.headers.map((header) => {
+            {this.state.headers.map((header) => {
               return <th key={`table-header-${header}`}>{header}</th>;
             })}
           </tr>
