@@ -13,10 +13,6 @@ class TableView extends Component {
     }
   }
 
-  resource(props = this.props) {
-    return (props.params || {}).resource || "posts"; 
-  }
-
   componentDidMount() {
     get(this.state.pathname, (json) => {
       return this.setState({
