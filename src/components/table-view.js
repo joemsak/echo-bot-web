@@ -14,12 +14,12 @@ class TableView extends Component {
   }
 
   componentDidMount() {
-    return this.resetState();
+    this.resetState();
   }
 
   resetState(pathname = this.state.pathname) {
     get(pathname, (json) => {
-      return this.setState({
+      this.setState({
         items: [].concat(json.data),
         name: json.name,
       })
@@ -31,7 +31,7 @@ class TableView extends Component {
       pathname: nextProps.location.pathname,
     });
 
-    return this.resetState(nextProps.location.pathname);
+    this.resetState(nextProps.location.pathname);
   }
 
   tableHeaders() {
