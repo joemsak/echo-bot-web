@@ -12,6 +12,7 @@ ReactDOM.render(
     <Route path="/" component={App} />
     <Route path="/:resource" component={TableView} />
     <Route path="/:resource/:id" component={TableView} />
+    <Route path="/:resource/:id/shares" component={TableView} />
   </Router>,
   document.getElementById('root')
 );
