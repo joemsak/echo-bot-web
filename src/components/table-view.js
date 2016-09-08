@@ -63,8 +63,20 @@ class TableView extends Component {
   tableCell(attribute) {
     if (attribute.value) {
       return attribute.value;
-    } else {
+    } else if(attribute.link) {
       return <Link to={attribute.link.href}>{attribute.link.text}</Link>;
+    } else {
+      return (
+        <ul>
+          {attribute.links.map((link) => {
+             return (
+               <li>
+                 <Link to={link.href}>{link.text}</Link>
+               </li>
+             );
+           })}
+        </ul>
+      );
     }
   }
 
